@@ -6,8 +6,9 @@ var rewardDollar=0;
 var riskReward=0;
 
 
+
 function inital () {
-  balance = parseInt(document.getElementById('balance').value);
+  balance = parseFloat(document.getElementById('balance').value);
   risk = parseFloat(document.getElementById('risk').value);
   reward = parseFloat(document.getElementById('reward').value);
   
@@ -15,14 +16,8 @@ function inital () {
 
 
 
-riskDollar = balance * risk/100;
-rewardDollar = balance * reward/100;
-riskReward = riskDollar/rewardDollar;
-console.log(riskDollar, rewardDollar, riskReward);
-  
 
-// Calculate winrate and lossrate and update
-balance
+
 
 
 var score = 0;
@@ -32,6 +27,7 @@ var loss=0;
 document.getElementById('win').addEventListener('click', function calculateWinrate() {
   win ++;
   score ++;
+  rewardDollar = balance * reward/100;
   balance += rewardDollar;
   console.log(win/score*100 , "$", balance);
 });
@@ -40,6 +36,7 @@ document.getElementById('win').addEventListener('click', function calculateWinra
 document.getElementById('loss').addEventListener('click', function calculateLossrate() {
   loss ++;
   score ++;
+  riskDollar = balance * risk/100;
   
   balance -= riskDollar;  
   console.log(win/score*100, "$", balance);
