@@ -13,7 +13,9 @@ var pnl=0;
 var pnl_2=0;
 var sumWin=0;
 var sumLoss=0;  
-
+var profitFaktor=0
+var winarray=[];
+var lossarray=[];
 
 function inital() {
   balance = parseFloat(document.getElementById('balance').value);
@@ -56,7 +58,9 @@ pnl_2_display.innerText="PnL: "+pnl_2.toFixed(1)+"%";
 
 
 var pf_display=document.getElementById('pf_display');
-var profitFaktor
+profitFaktor = sumWin/sumLoss;
+pf_display.innerText="Profit Faktor: "+profitFaktor.toFixed(1);
+
 
 
 }
@@ -79,14 +83,27 @@ document.getElementById('win').addEventListener('click', function calculateWinra
   rewardDollar = balance * reward/100;
   balance += rewardDollar-sumCommision;
   winrate = win/score*100;
-  
-  
+
+ 
+winarray.push(rewardDollar);
+
+console.log(winarray);
+for (var i = 0; i < winarray.length; i++) {
+  sumWin += winarray[i];
+ 
+
+ ;
+}
+
 
  
 update();
 
 
+
 });
+
+ 
 
 
 document.getElementById('loss').addEventListener('click', function calculateLossrate() {
@@ -98,13 +115,25 @@ document.getElementById('loss').addEventListener('click', function calculateLoss
   balance -= riskDollar-sumCommision;  
   winrate = win/score*100;
  
+ lossarray.push(riskDollar);
+  console.log(lossarray);
   
+  for (var i = 0; i < lossarray.length; i++) {
+    sumLoss += lossarray[i];
+  
+    ;
+  }
 update ()
+
 
 
  
   
 }); 
+
+
+
+
 
 document.getElementById('reset').addEventListener('click', function reset() {
 
@@ -115,6 +144,9 @@ sumCommision = 0;
 
 win=0;
 loss=0;
+winarray.length=0;
+lossarray.length=0;
+profitFaktor=0;
 
 update();
   
