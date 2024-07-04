@@ -58,8 +58,11 @@ pnl_2_display.innerText="PnL: "+pnl_2.toFixed(1)+"%";
 
 
 var pf_display=document.getElementById('pf_display');
-profitFaktor = sumWin/sumLoss;
+
 pf_display.innerText="Profit Faktor: "+profitFaktor.toFixed(1);
+sumWin = 0;
+sumLoss = 0;
+
 
 
 
@@ -88,11 +91,13 @@ document.getElementById('win').addEventListener('click', function calculateWinra
 winarray.push(rewardDollar);
 
 console.log(winarray);
-for (var i = 0; i < winarray.length; i++) {
+for (let i = 0; i < winarray.length; i++) {
   sumWin += winarray[i];
  
+  profitFaktor=(sumWin||1)/(sumLoss||1);
 
- ;
+  
+ 
 }
 
 
@@ -104,6 +109,7 @@ update();
 });
 
  
+console.log(sumWin);
 
 
 document.getElementById('loss').addEventListener('click', function calculateLossrate() {
@@ -120,15 +126,17 @@ document.getElementById('loss').addEventListener('click', function calculateLoss
   
   for (var i = 0; i < lossarray.length; i++) {
     sumLoss += lossarray[i];
+
+    profitFaktor=(sumWin||1)/(sumLoss||1);
   
-    ;
+    
   }
+ 
 update ()
 
 
 
- 
-  
+
 }); 
 
 
